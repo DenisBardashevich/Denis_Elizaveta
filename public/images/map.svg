@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 560" font-family="Georgia, serif">
+  <rect width="800" height="560" fill="#f2ecdf"/>
+
+  <!-- park areas -->
+  <path d="M0 0h220c-20 60-60 90-110 100S30 110 0 140Z" fill="#cdd9c0"/>
+  <path d="M620 400c60-30 130-20 180 10v150H560c10-70 20-120 60-160Z" fill="#cdd9c0"/>
+  <ellipse cx="120" cy="460" rx="120" ry="70" fill="#d6e0c9"/>
+
+  <!-- river -->
+  <path d="M0 300 C 150 260, 260 340, 420 300 S 680 240, 800 300 L800 360 C 660 300, 520 380, 380 340 S 140 330, 0 370 Z" fill="#bfd6dd"/>
+
+  <!-- roads -->
+  <path d="M60 560 C 140 420, 260 380, 380 360 S 600 300, 700 140" fill="none" stroke="#e3d7bf" stroke-width="26" stroke-linecap="round"/>
+  <path d="M60 560 C 140 420, 260 380, 380 360 S 600 300, 700 140" fill="none" stroke="#f8f3e8" stroke-width="18" stroke-linecap="round" stroke-dasharray="4 10"/>
+  <path d="M0 200 C 200 180, 340 220, 520 190 S 720 150, 800 170" fill="none" stroke="#e3d7bf" stroke-width="20"/>
+  <path d="M0 200 C 200 180, 340 220, 520 190 S 720 150, 800 170" fill="none" stroke="#f8f3e8" stroke-width="12" stroke-dasharray="4 9"/>
+  <path d="M430 560 C 420 480, 430 420, 400 360" fill="none" stroke="#e3d7bf" stroke-width="16"/>
+  <path d="M430 560 C 420 480, 430 420, 400 360" fill="none" stroke="#f8f3e8" stroke-width="10" stroke-dasharray="4 8"/>
+
+  <!-- blocks -->
+  <g fill="#e9dfcd">
+    <rect x="500" y="210" width="90" height="60" rx="8"/>
+    <rect x="610" y="200" width="80" height="55" rx="8"/>
+    <rect x="120" y="230" width="80" height="50" rx="8"/>
+    <rect x="230" y="240" width="60" height="45" rx="8"/>
+    <rect x="540" y="430" width="90" height="60" rx="8"/>
+  </g>
+
+  <!-- trees -->
+  <g fill="#9cae8f">
+    <circle cx="90" cy="70" r="12"/><circle cx="130" cy="90" r="10"/><circle cx="60" cy="110" r="9"/>
+    <circle cx="700" cy="470" r="13"/><circle cx="740" cy="500" r="10"/><circle cx="660" cy="500" r="9"/>
+    <circle cx="150" cy="430" r="11"/><circle cx="100" cy="470" r="9"/>
+  </g>
+
+  <!-- venue pin -->
+  <g transform="translate(400 300)">
+    <circle r="46" fill="#a96868" opacity="0.15">
+      <animate attributeName="r" values="40;52;40" dur="3s" repeatCount="indefinite"/>
+    </circle>
+    <path d="M0 14 C -26 -16, -14 -46, 0 -46 C 14 -46, 26 -16, 0 14Z" fill="#a96868" stroke="#f8f3e8" stroke-width="3"/>
+    <text y="-14" text-anchor="middle" font-size="20" fill="#f8f3e8">&#9829;</text>
+  </g>
+  <text x="400" y="345" text-anchor="middle" font-size="26" fill="#463e35" font-style="italic">Усадьба «Рыжий кот»</text>
+
+  <!-- road label -->
+  <text x="600" y="240" text-anchor="middle" font-size="15" fill="#8a7a66" transform="rotate(-18 600 240)">Садовая ул.</text>
+
+  <!-- compass -->
+  <g transform="translate(735 70)" stroke="#8a7a66" fill="none">
+    <circle r="22"/>
+    <path d="M0 -22 L7 8 L0 2 L-7 8 Z" fill="#a96868" stroke="none"/>
+    <text y="-30" text-anchor="middle" font-size="13" fill="#8a7a66" stroke="none">N</text>
+  </g>
+</svg>
