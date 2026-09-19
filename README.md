@@ -1,36 +1,52 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Денис и Елизавета — свадебное приглашение
 
-## Getting Started
+Интерактивный сайт-приглашение: Next.js 16 (App Router), Tailwind CSS v4, Framer Motion.
 
-First, run the development server:
+## Локальный запуск
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Открой [http://localhost:3000](http://localhost:3000) и кликни по конверту.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Telegram-уведомления (RSVP)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Форма отправляет ответы гостей в Telegram через `/api/rsvp`. Нужны переменные окружения:
 
-## Learn More
+```bash
+cp .env.example .env.local
+```
 
-To learn more about Next.js, take a look at the following resources:
+| Переменная           | Где взять                                        |
+| -------------------- | ------------------------------------------------ |
+| `TELEGRAM_BOT_TOKEN` | @BotFather → `/newbot`                           |
+| `TELEGRAM_CHAT_ID`   | напиши боту @userinfobot — он покажет твой id    |
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Не забудь сначала нажать «Start» у своего бота — иначе он не сможет писать тебе.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Деплой на Vercel
 
-## Deploy on Vercel
+1. Запушь репозиторий на GitHub.
+2. На [vercel.com](https://vercel.com) → **Add New → Project** → импортируй репозиторий.
+3. В **Environment Variables** добавь `TELEGRAM_BOT_TOKEN` и `TELEGRAM_CHAT_ID`.
+4. Deploy. Каждый пуш в `main` будет автоматически обновлять сайт.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Структура
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```
+src/
+  app/
+    page.tsx          — сборка страницы + конверт-оверлей
+    api/rsvp/route.ts — отправка формы в Telegram
+  components/
+    Envelope.tsx      — интерактивный конверт (hero)
+    Hero.tsx          — имена, дата, таймер
+    Countdown.tsx     — обратный отсчёт до 08.07.2027
+    Timeline.tsx      — программа дня + эффекты при доскролле
+    Gallery.tsx       — фотогалерея + лайтбокс
+    Location.tsx      — карта и фото усадьбы
+    RSVPForm.tsx      — форма подтверждения
+    AmbientHearts.tsx — падающие сердечки на фоне
+```
