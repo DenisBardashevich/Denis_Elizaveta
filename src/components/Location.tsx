@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useState } from "react";
 import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
-import { ChevronLeft, ChevronRight, MapPin, Clock, Car, X } from "lucide-react";
+import { ChevronLeft, ChevronRight, MapPin, Clock, X } from "lucide-react";
 import { SectionHeading, Reveal } from "./Section";
 
 const VENUE_PHOTOS = [
@@ -39,19 +39,16 @@ export default function Location() {
   }, [index, close, step]);
 
   return (
-    <section id="location" className="relative px-6 py-24 sm:py-32">
+    <section id="location" className="relative px-5 py-16 sm:px-6 sm:py-32">
       <SectionHeading overline="Где мы будем" title="Локация" />
 
-      <div className="mx-auto grid max-w-5xl gap-8 lg:grid-cols-5">
+      <div className="mx-auto grid max-w-5xl gap-6 sm:gap-8 lg:grid-cols-5">
         <Reveal className="lg:col-span-2">
-          <div className="glass texture-paper flex h-full flex-col justify-center gap-6 rounded-3xl p-8 shadow-[0_20px_50px_-25px_rgba(70,62,53,0.4)]">
+          <div className="glass texture-paper flex h-full flex-col justify-center gap-5 rounded-3xl p-5 shadow-[0_20px_50px_-25px_rgba(70,62,53,0.4)] sm:gap-6 sm:p-8">
             <div>
-              <div className="flex items-center gap-3">
-                <MapPin className="h-5 w-5 text-rosewood" />
-                <h3 className="font-serif text-3xl font-semibold text-ink">
-                  Усадьба «Рыжий кот»
-                </h3>
-              </div>
+              <h3 className="font-serif text-2xl font-semibold text-ink sm:text-3xl">
+                Усадьба «Рыжий кот»
+              </h3>
               <p className="mt-3 leading-relaxed text-cocoa">
                 Уютная загородная усадьба с зелёной территорией и банкетным
                 залом. А ещё там есть баня, бассейн и джакузи — берите
@@ -60,7 +57,7 @@ export default function Location() {
             </div>
 
             <div className="flex items-start gap-3 text-sm text-cocoa">
-              <Car className="mt-0.5 h-5 w-5 shrink-0 text-gold" />
+              <MapPin className="mt-0.5 h-5 w-5 shrink-0 text-gold" />
               <p>
                 д. Мончаки, Центральная ул., 29А — ~25 км от Минска, за
                 Острошицким Городком. В навигаторе ищите «Рыжий кот Redhouse».
@@ -92,7 +89,7 @@ export default function Location() {
       </div>
 
       {/* фотографии усадьбы */}
-      <div className="mx-auto mt-10 grid max-w-5xl grid-cols-2 gap-3 sm:gap-5 lg:grid-cols-3">
+      <div className="mx-auto mt-6 grid max-w-5xl grid-cols-2 gap-3 sm:mt-10 sm:gap-5 lg:grid-cols-3">
         {VENUE_PHOTOS.map((p, i) => (
           <motion.button
             key={p.src}

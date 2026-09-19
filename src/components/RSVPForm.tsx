@@ -15,9 +15,10 @@ const DRINKS = [
   "Вино красное",
   "Вино белое",
   "Игристое",
-  "Крепкий алкоголь",
+  "Водка",
+  "Коньяк",
   "Пиво / сидр",
-  "Безалкогольные напитки",
+  "Б/а напитки",
 ];
 
 type Status = "idle" | "sending" | "success" | "error";
@@ -97,13 +98,13 @@ export default function RSVPForm() {
   };
 
   return (
-    <section id="rsvp" className="relative px-6 py-24 sm:py-32">
+    <section id="rsvp" className="relative px-5 py-16 sm:px-6 sm:py-32">
       <SectionHeading overline="Ждём вашего ответа" title="Подтверждение" />
 
       <Reveal className="mx-auto max-w-2xl">
         <form
           onSubmit={submit}
-          className="glass texture-paper space-y-8 rounded-3xl p-6 shadow-[0_24px_60px_-30px_rgba(70,62,53,0.45)] sm:p-10"
+          className="glass texture-paper space-y-6 rounded-3xl p-5 shadow-[0_24px_60px_-30px_rgba(70,62,53,0.45)] sm:space-y-8 sm:p-10"
         >
           <fieldset>
             <legend className={labelCls}>Сможете ли вы быть с нами?</legend>
