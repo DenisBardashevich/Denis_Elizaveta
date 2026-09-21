@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef } from "react";
+import Image from "next/image";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { ChevronDown, MapPin } from "lucide-react";
 import Countdown from "./Countdown";
@@ -60,13 +61,13 @@ export default function Hero({ started }: { started: boolean }) {
 
         <motion.h1
           variants={item}
-          className="mt-6 font-script text-6xl leading-[1.05] text-ink sm:text-8xl"
+          className="mt-6 font-script text-6xl leading-[1.05] text-ink sm:whitespace-nowrap sm:text-7xl lg:text-8xl"
         >
-          Денис
+          Дениса
           <span className="mx-3 inline-block font-serif text-4xl italic text-rosewood sm:mx-5 sm:text-6xl">
             и
           </span>
-          Елизавета
+          Елизаветы
         </motion.h1>
 
         <motion.div
@@ -82,9 +83,16 @@ export default function Hero({ started }: { started: boolean }) {
 
         <motion.p
           variants={item}
-          className="mt-2 font-serif text-sm uppercase tracking-[0.3em] text-cocoa/80"
+          className="mt-2 font-serif text-base font-semibold uppercase tracking-[0.3em] text-ink sm:text-lg"
         >
           Четверг
+        </motion.p>
+
+        <motion.p
+          variants={item}
+          className="mt-1 font-serif text-sm font-semibold uppercase tracking-[0.3em] text-rosewood sm:text-base"
+        >
+          Прибытие к 16:00
         </motion.p>
 
         <motion.a
@@ -98,6 +106,21 @@ export default function Hero({ started }: { started: boolean }) {
 
         <motion.div variants={item} className="mt-12 w-full max-w-xl">
           <Countdown />
+        </motion.div>
+
+        <motion.div
+          variants={item}
+          className="mt-10 flex items-center justify-center"
+        >
+          <div className="relative aspect-[3/4] w-44 -rotate-2 overflow-hidden rounded-2xl border-4 border-white shadow-[0_18px_40px_-18px_rgba(70,62,53,0.5)] transition-transform duration-500 hover:rotate-0 sm:w-56">
+            <Image
+              src="/images/couple-1.jpg"
+              alt="Денис и Лиза на закате у воды"
+              fill
+              sizes="(max-width: 640px) 50vw, 230px"
+              className="object-cover"
+            />
+          </div>
         </motion.div>
       </motion.div>
 

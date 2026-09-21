@@ -12,13 +12,12 @@ import {
   Users,
   UtensilsCrossed,
   Waves,
-  CakeSlice,
   MoonStar,
   Heart,
 } from "lucide-react";
 import { SectionHeading } from "./Section";
 
-type FxKind = "hearts" | "champagne" | "water" | "fireworks" | "stars";
+type FxKind = "hearts" | "champagne" | "water" | "stars";
 
 const EVENTS: {
   time: string;
@@ -35,18 +34,11 @@ const EVENTS: {
     fx: "hearts",
   },
   {
-    time: "17:00",
+    time: "16:30",
     title: "Банкет",
-    text: "Ужин, тосты и музыка — но формат ближе к дружеской вечеринке, чем к классическому банкету",
+    text: "Вкусный ужин, музыка, веселье и душевные разговоры — вечер в кругу самых близких",
     Icon: UtensilsCrossed,
     fx: "champagne",
-  },
-  {
-    time: "20:00",
-    title: "Свадебный торт",
-    text: "Сладкий финал официальной части вечера",
-    Icon: CakeSlice,
-    fx: "fireworks",
   },
   {
     time: "21:00",
@@ -67,7 +59,6 @@ const EVENTS: {
 const BUBBLE_COLORS = ["#c3a265", "#d9b877", "#e8d5a8"];
 const HEART_COLORS = ["#c98d8d", "#a96868", "#e0b3b3"];
 const WATER_COLORS = ["#8fb8c9", "#a9cede", "#7aa7bd"];
-const FIREWORK_COLORS = ["#c3a265", "#c98d8d", "#a96868", "#9cae8f"];
 const STAR_COLORS = ["#c3a265", "#e8d5a8", "#f0e6cf"];
 
 const FX_MS = 2800;
@@ -135,75 +126,6 @@ function RisingFX({
   );
 }
 
-/** radial burst for the cake */
-function FireworksFX() {
-  const bursts = useMemo(
-    () =>
-      [
-        { cx: 50, cy: 38, delay: 0 },
-        { cx: 26, cy: 55, delay: 0.35 },
-        { cx: 74, cy: 55, delay: 0.55 },
-      ].map((b) => ({
-        ...b,
-        parts: Array.from({ length: 16 }, (_, i) => {
-          const angle = (i / 16) * Math.PI * 2 + rand(-0.15, 0.15);
-          const dist = rand(70, 190);
-          return {
-            x: Math.cos(angle) * dist,
-            y: Math.sin(angle) * dist,
-            size: rand(4, 9),
-            delay: rand(0, 0.12),
-            color: FIREWORK_COLORS[i % FIREWORK_COLORS.length],
-          };
-        }),
-      })),
-    []
-  );
-  return (
-    <>
-      {bursts.map((b, bi) => (
-        <div
-          key={bi}
-          className="absolute"
-          style={{ left: `${b.cx}%`, top: `${b.cy}%` }}
-        >
-          <motion.span
-            initial={{ opacity: 0.5, scale: 0.2 }}
-            animate={{ opacity: 0, scale: 1.8 }}
-            transition={{ duration: 0.6, delay: b.delay, ease: "easeOut" }}
-            className="absolute block h-16 w-16 -translate-x-1/2 -translate-y-1/2 rounded-full bg-gold/50 blur-md"
-          />
-          {b.parts.map((p, i) => (
-            <motion.span
-              key={i}
-              initial={{ x: 0, y: 0, opacity: 1, scale: 1 }}
-              animate={{
-                x: p.x,
-                y: [0, p.y, p.y + 60],
-                opacity: [1, 1, 0],
-                scale: [1, 1, 0.4],
-              }}
-              transition={{
-                duration: 1.3,
-                delay: b.delay + p.delay,
-                ease: "easeOut",
-              }}
-              className="absolute rounded-full"
-              style={{
-                width: p.size,
-                height: p.size,
-                background: p.color,
-                marginLeft: -p.size / 2,
-                marginTop: -p.size / 2,
-              }}
-            />
-          ))}
-        </div>
-      ))}
-    </>
-  );
-}
-
 /** twinkling stars for the evening finale */
 function StarsFX() {
   const stars = useMemo(
@@ -259,7 +181,6 @@ function EventFX({ kind }: { kind: FxKind }) {
       )}
       {kind === "champagne" && <RisingFX colors={BUBBLE_COLORS} count={16} />}
       {kind === "hearts" && <RisingFX colors={HEART_COLORS} count={12} heart />}
-      {kind === "fireworks" && <FireworksFX />}
       {kind === "stars" && <StarsFX />}
     </div>
   );
@@ -384,15 +305,6 @@ export default function Timeline() {
         </div>
       </div>
 
-      <motion.p
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.8, delay: 0.2 }}
-        className="mx-auto mt-14 max-w-md text-center text-sm italic text-cocoa/80"
-      >
-        * Более подробная программа будет известна ближе к дате торжества
-      </motion.p>
     </section>
   );
 }

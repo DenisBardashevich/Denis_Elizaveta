@@ -43,10 +43,7 @@ export default function Location() {
 
             <div className="flex items-start gap-3 text-sm text-cocoa">
               <Clock className="mt-0.5 h-5 w-5 shrink-0 text-gold" />
-              <p>
-                Сбор гостей в 16:00 — просим прибывать вовремя, начинаем без
-                опозданий.
-              </p>
+              <p>Сбор гостей в 16:00 — просим прибывать вовремя.</p>
             </div>
           </div>
         </Reveal>

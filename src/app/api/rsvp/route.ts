@@ -36,8 +36,9 @@ export async function POST(req: Request) {
     "",
     `<b>ФИО:</b> ${esc(body.name) || "—"}`,
     `<b>Присутствие:</b> ${esc(body.attendance) || "—"}`,
+    esc(body.whenLater) ? `<b>Когда сообщит:</b> ${esc(body.whenLater)}` : null,
     `<b>Напитки:</b> ${drinks || "—"}`,
-  ];
+  ].filter(Boolean);
 
   const res = await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
     method: "POST",

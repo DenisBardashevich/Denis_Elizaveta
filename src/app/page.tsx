@@ -7,7 +7,6 @@ import Envelope from "@/components/Envelope";
 import AmbientHearts from "@/components/AmbientHearts";
 import Hero from "@/components/Hero";
 import Timeline from "@/components/Timeline";
-import Gallery from "@/components/Gallery";
 import Location from "@/components/Location";
 import RSVPForm from "@/components/RSVPForm";
 
@@ -34,8 +33,6 @@ export default function Home() {
       {/* soft section divider */}
       <div className="mx-auto h-px max-w-5xl bg-gradient-to-r from-transparent via-gold/40 to-transparent" />
       <Timeline />
-      <div className="mx-auto h-px max-w-5xl bg-gradient-to-r from-transparent via-gold/40 to-transparent" />
-      <Gallery />
       <div className="mx-auto h-px max-w-5xl bg-gradient-to-r from-transparent via-gold/40 to-transparent" />
       <Location />
       <div className="mx-auto h-px max-w-5xl bg-gradient-to-r from-transparent via-gold/40 to-transparent" />

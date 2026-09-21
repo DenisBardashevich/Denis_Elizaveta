@@ -17,7 +17,6 @@ const DRINKS = [
   "Игристое",
   "Водка",
   "Коньяк",
-  "Пиво / сидр",
   "Б/а напитки",
 ];
 
@@ -64,6 +63,7 @@ function RadioCard({
 export default function RSVPForm() {
   const [attendance, setAttendance] = useState(ATTENDANCE[0]);
   const [name, setName] = useState("");
+  const [whenLater, setWhenLater] = useState("");
   const [drinks, setDrinks] = useState<string[]>([]);
   const [status, setStatus] = useState<Status>("idle");
   const [errorMsg, setErrorMsg] = useState("");
@@ -85,6 +85,7 @@ export default function RSVPForm() {
         body: JSON.stringify({
           attendance,
           name,
+          whenLater,
           drinks,
         }),
       });
@@ -135,34 +136,65 @@ export default function RSVPForm() {
             />
           </div>
 
-          <fieldset>
-            <legend className={labelCls}>
-              Предпочтения по напиткам
-            </legend>
-            <div className="grid grid-cols-2 gap-2 sm:grid-cols-3">
-              {DRINKS.map((d) => {
-                const on = drinks.includes(d);
-                return (
-                  <label
-                    key={d}
-                    className={`flex cursor-pointer items-center gap-2.5 rounded-xl border px-3.5 py-3 text-sm transition ${
-                      on
-                        ? "border-olive bg-sage/25 text-ink"
-                        : "border-sand bg-white/50 text-cocoa hover:border-gold/60"
-                    }`}
-                  >
-                    <input
-                      type="checkbox"
-                      checked={on}
-                      onChange={() => toggleDrink(d)}
-                      className="h-4 w-4 accent-[#7c8a6f]"
-                    />
-                    {d}
-                  </label>
-                );
-              })}
-            </div>
-          </fieldset>
+          <AnimatePresence initial={false}>
+            {attendance === "Сообщим позже" && (
+              <motion.div
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: "auto" }}
+                exit={{ opacity: 0, height: 0 }}
+                transition={{ duration: 0.3, ease: "easeInOut" }}
+                className="overflow-hidden"
+              >
+                <label htmlFor="whenLater" className={labelCls}>
+                  Когда примерно сообщите?
+                </label>
+                <input
+                  id="whenLater"
+                  value={whenLater}
+                  onChange={(e) => setWhenLater(e.target.value)}
+                  placeholder="Например: до конца февраля"
+                  className={inputCls}
+                />
+              </motion.div>
+            )}
+          </AnimatePresence>
+
+          <AnimatePresence initial={false}>
+            {attendance !== "К сожалению, не получится" && (
+              <motion.fieldset
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: "auto" }}
+                exit={{ opacity: 0, height: 0 }}
+                transition={{ duration: 0.3, ease: "easeInOut" }}
+                className="overflow-hidden"
+              >
+                <legend className={labelCls}>Предпочтения по напиткам</legend>
+                <div className="grid grid-cols-2 gap-2 sm:grid-cols-3">
+                  {DRINKS.map((d) => {
+                    const on = drinks.includes(d);
+                    return (
+                      <label
+                        key={d}
+                        className={`flex cursor-pointer items-center gap-2.5 rounded-xl border px-3.5 py-3 text-sm transition ${
+                          on
+                            ? "border-olive bg-sage/25 text-ink"
+                            : "border-sand bg-white/50 text-cocoa hover:border-gold/60"
+                        }`}
+                      >
+                        <input
+                          type="checkbox"
+                          checked={on}
+                          onChange={() => toggleDrink(d)}
+                          className="h-4 w-4 accent-[#7c8a6f]"
+                        />
+                        {d}
+                      </label>
+                    );
+                  })}
+                </div>
+              </motion.fieldset>
+            )}
+          </AnimatePresence>
 
           <button
             type="submit"
