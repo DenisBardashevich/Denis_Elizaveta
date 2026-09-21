@@ -31,11 +31,19 @@ export async function POST(req: Request) {
     ? body.drinks.map(esc).filter(Boolean).join(", ")
     : "";
 
+  const ATT_EMOJI: Record<string, string> = {
+    "С удовольствием": "✅",
+    "К сожалению, не получится": "❌",
+    "Сообщим позже": "❓",
+  };
+  const att = String(body.attendance ?? "");
+  const attEmoji = ATT_EMOJI[att] ? `${ATT_EMOJI[att]} ` : "";
+
   const lines = [
     "💍 <b>Новый ответ на приглашение</b>",
     "",
     `<b>ФИО:</b> ${esc(body.name) || "—"}`,
-    `<b>Присутствие:</b> ${esc(body.attendance) || "—"}`,
+    `<b>Присутствие:</b> ${attEmoji}${esc(att) || "—"}`,
     esc(body.whenLater) ? `<b>Когда сообщит:</b> ${esc(body.whenLater)}` : null,
     `<b>Напитки:</b> ${drinks || "—"}`,
   ].filter(Boolean);

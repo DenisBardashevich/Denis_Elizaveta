@@ -53,6 +53,7 @@ function RadioCard({
         value={value}
         checked={checked}
         onChange={onChange}
+        required
         className="h-4 w-4 accent-[#a96868]"
       />
       {value}
@@ -61,7 +62,7 @@ function RadioCard({
 }
 
 export default function RSVPForm() {
-  const [attendance, setAttendance] = useState(ATTENDANCE[0]);
+  const [attendance, setAttendance] = useState("");
   const [name, setName] = useState("");
   const [whenLater, setWhenLater] = useState("");
   const [drinks, setDrinks] = useState<string[]>([]);
@@ -72,6 +73,15 @@ export default function RSVPForm() {
     setDrinks((prev) =>
       prev.includes(d) ? prev.filter((x) => x !== d) : [...prev, d]
     );
+
+  const reset = () => {
+    setAttendance("");
+    setName("");
+    setWhenLater("");
+    setDrinks([]);
+    setStatus("idle");
+    setErrorMsg("");
+  };
 
   const submit = async (e: FormEvent) => {
     e.preventDefault();
@@ -103,6 +113,31 @@ export default function RSVPForm() {
       <SectionHeading overline="Ждём вашего ответа" title="Подтверждение" />
 
       <Reveal className="mx-auto max-w-2xl">
+        {status === "success" ? (
+          <motion.div
+            initial={{ opacity: 0, scale: 0.96 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+            className="glass texture-paper flex flex-col items-center gap-4 rounded-3xl p-10 text-center shadow-[0_24px_60px_-30px_rgba(70,62,53,0.45)] sm:p-14"
+          >
+            <CheckCircle2 className="h-14 w-14 text-olive" />
+            <h3 className="font-script text-4xl text-ink">Спасибо!</h3>
+            <p className="max-w-sm leading-relaxed text-cocoa">
+              {attendance === "С удовольствием"
+                ? "Ваш ответ отправлен — мы уже получили его и очень радуемся. Ждём вас!"
+                : attendance === "Сообщим позже"
+                  ? "Ваш ответ отправлен — мы получили его и будем ждать вашей весточки."
+                  : "Ваш ответ отправлен — спасибо, что сообщили. Нам будет вас не хватать!"}
+            </p>
+            <button
+              type="button"
+              onClick={reset}
+              className="mt-2 rounded-full border border-ink/15 px-6 py-2.5 text-xs uppercase tracking-[0.2em] text-cocoa transition hover:border-gold hover:text-ink"
+            >
+              Отправить ещё один ответ
+            </button>
+          </motion.div>
+        ) : (
         <form
           onSubmit={submit}
           className="glass texture-paper space-y-6 rounded-3xl p-5 shadow-[0_24px_60px_-30px_rgba(70,62,53,0.45)] sm:space-y-8 sm:p-10"
@@ -210,17 +245,6 @@ export default function RSVPForm() {
           </button>
 
           <AnimatePresence>
-            {status === "success" && (
-              <motion.p
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0 }}
-                className="flex items-center justify-center gap-2 rounded-xl bg-sage/25 px-4 py-3 text-center text-sm text-olive"
-              >
-                <CheckCircle2 className="h-5 w-5" />
-                Спасибо! Ваш ответ отправлен — мы получили его в Telegram.
-              </motion.p>
-            )}
             {status === "error" && (
               <motion.p
                 initial={{ opacity: 0, y: 10 }}
@@ -235,6 +259,7 @@ export default function RSVPForm() {
             )}
           </AnimatePresence>
         </form>
+        )}
       </Reveal>
     </section>
   );
