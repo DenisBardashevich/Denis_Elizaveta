@@ -10,6 +10,7 @@ import Timeline from "@/components/Timeline";
 import Location from "@/components/Location";
 import RSVPForm from "@/components/RSVPForm";
 
+
 export default function Home() {
   const [opened, setOpened] = useState(false);
 
