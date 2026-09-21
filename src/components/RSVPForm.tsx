@@ -2,7 +2,7 @@
 
 import { useState, type FormEvent } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { CheckCircle2, Loader2, Send, XCircle } from "lucide-react";
+import { CheckCircle2, Flower2, Loader2, Send, XCircle } from "lucide-react";
 import { SectionHeading, Reveal } from "./Section";
 
 const ATTENDANCE = [
@@ -226,6 +226,14 @@ export default function RSVPForm() {
                       </label>
                     );
                   })}
+                </div>
+
+                <div className="mt-4 flex items-start gap-3 rounded-xl border border-gold/40 bg-gold/10 px-4 py-3 text-sm leading-relaxed text-cocoa">
+                  <Flower2 className="mt-0.5 h-5 w-5 shrink-0 text-rosewood" />
+                  <p>
+                    Примечание: цветы дарить не нужно. Для нас дороже всего
+                    ваше присутствие и хорошее настроение ❤️
+                  </p>
                 </div>
               </motion.fieldset>
             )}
