@@ -181,19 +181,24 @@ export default function Envelope({ onOpen }: { onOpen: () => void }) {
         </motion.div>
 
         {/* hint */}
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: opening ? 0 : [0.4, 1, 0.4] }}
-          transition={{
-            opacity: opening
-              ? { duration: 0.3 }
-              : { repeat: Infinity, duration: 2.2, ease: "easeInOut" },
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{
+            opacity: opening ? 0 : 1,
+            y: 0,
+            scale: opening ? 1 : [1, 1.05, 1],
           }}
-          className="flex items-center gap-2 font-sans text-xs uppercase tracking-[0.3em] text-cocoa"
+          transition={{
+            opacity: { duration: 0.6, delay: opening ? 0 : 1 },
+            scale: opening
+              ? { duration: 0.3 }
+              : { repeat: Infinity, duration: 1.8, ease: "easeInOut", delay: 1 },
+          }}
+          className="flex items-center gap-2.5 rounded-full border border-gold/50 bg-white/50 px-6 py-3 font-sans text-xs font-medium uppercase tracking-[0.25em] text-ink shadow-[0_10px_25px_-10px_rgba(70,62,53,0.35)]"
         >
-          <MousePointerClick className="h-4 w-4" />
-          Нажмите, чтобы открыть
-        </motion.p>
+          <MousePointerClick className="h-4 w-4 text-rosewood" />
+          Нажмите на конверт
+        </motion.div>
       </div>
     </motion.div>
   );
